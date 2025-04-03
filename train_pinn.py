@@ -73,7 +73,7 @@ def train(model, optimizer, train_loader, epochs):
             loss.append(train_step(model, optimizer, x[0]))
         for x, y in test_loader:
             out = model(x)
-            test_loss.append(jnp.mean((jax.lax.complex(out[:, 0], out[:, 1]) - y**2)))
+            test_loss.append(jnp.mean((out - y) ** 2))
         print(
             f"Epoch: {epoch} Loss: {np.mean(loss)} Test Loss (MSE):{np.mean(test_loss)}"
         )
